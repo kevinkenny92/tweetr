@@ -4,7 +4,7 @@ $(document).ready(function() {
   let chars = $(this).val();
   let count = $('.counter');
     // console.log(chars.length);
-    count.html(140 - chars.length);
+    count.text(140 - chars.length);
 
     if (chars.length > 140) {
       count.addClass('red');

@@ -5,6 +5,7 @@
    padding: 10px 7px;
    background: #eee;
    overflow: auto;
+   display: none;
  }
 
  .container .new-tweet h2 {
@@ -36,7 +37,11 @@
   color: red;
 }
 
-
+.tweet-append-error {
+  padding: 0 7px;
+  line-height: 24px;
+  color: red;
+}
 
 /*
  * Styles for each new tweet
@@ -98,4 +103,9 @@
   float: right;
   color: #19cbba;
   display: none;
+}
+
+/* Show icons */
+.new-tweet__icons.show {
+  display: initial;
 }

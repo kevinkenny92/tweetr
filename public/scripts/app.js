@@ -1,5 +1,4 @@
 
-
 /*
  * Client-side JS logic goes here
  * jQuery is already loaded
@@ -12,6 +11,9 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 //given in exercise
+
+/* Modification week3day3
+
 var data = [
   {
     "user": {
@@ -57,12 +59,22 @@ var data = [
     },
     "created_at": 1461113796368
   }
-];
+]; */
 
 
 //Modifications for Last Part of Week3day2
+$(document).ready(function() {
+
+function convertDate(postedOn) {
+  var oneDay = 1000 * 60 * 60 * 24;    //convert from milliseconds to seconds, to minutes, to hours to days
+  var dateToday = Date.now();
+  var postedDay = postedOn;
+
+  var daysAgo = Math.abs(dateToday - postedDay); //absolute value of a number
 
 
+  return Math.round(daysAgo/oneDay);  ///round off function
+}
 function renderTweets(tweets) {
   // loops through tweets
     // calls createTweetElement for each tweet
@@ -74,28 +86,114 @@ function renderTweets(tweets) {
   };
 };
 
-function createTweetElement(tweet) {
-  let output = '';
+function escape(str) {
+  var div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+}
 
-  output += `<article class="tweet">
+function createTweetElement(tweet) {
+  var output = '';
+
+   output += `<article class="tweet">
             <header>
-              <img src="${tweet.user.avatars.small}"/>
-              <h2>${tweet.user.name}</h2>
-              <span>${tweet.user.handle}</span>
+              <img src="${escape(tweet.user.avatars.small)}"/>
+              <h2>${escape(tweet.user.name)}</h2>
+              <span>${escape(tweet.user.handle)}</span>
             </header>
             <p>
-              ${tweet.content.text}
+              ${escape(tweet.content.text)}
             </p>
             <footer>
-              <div class="new-tweet__time-stamp">${tweet.created_at}</div>
+              <div class="new-tweet__time-stamp">${escape(convertDate(tweet.created_at))} Days ago</div>
               <div class="new-tweet__icons">
-                <i class="fa fa-flag" aria-hidden="true"></i>
-                <i class="fa fa-retweet" aria-hidden="true"></i>
-                <i class="fa fa-heart" aria-hidden="true"></i>
+                <i class="fa fa-flag"></i>
+                <i class="fa fa-retweet"></i>
+                <i class="fa fa-heart"></i>
               </div>
             </footer>
           </article>`
 
   return output
 }
+
+
+
+
 //Repeat again to hover over new files.
+
+// LOAD TWEETS WEEK3DAY3 *
+
+const loadTweets = () => {
+    $.ajax({
+      method: 'GET',
+      url: '/tweets'        //ajax method direct to tweets
+    })
+    .done((data) => {
+      console.log(data);
+      renderTweets(data);
+    })
+    .fail(console.error);
+  };
+
+  $('.new-tweet__container').on('mouseenter', '.tweet', function() {
+   // Bind an event handler to be fired when the mouse enters an element, or trigger that handler on an element //
+    $(this).find('.new-tweet__icons').addClass('show');
+  })
+
+  $('.new-tweet__container').on('mouseleave', '.tweet', function() {
+    $(this).find('.new-tweet__icons').removeClass('show');
+  })
+  //Bind an event handler to be fired when the mouse leaves an element, or trigger that handler on an element.
+
+  // form handlers
+  $('.new-tweet form').on('submit', (e) => {
+    event.preventDefault();          //If this method is called, the default action of the event will not be triggered//
+
+    var textBox = $('.new-tweet textarea');
+
+    console.log(textBox.val());
+    //Get the current value of the first element in the set of matched elements or set the value of every matched element//
+      //Does not accept arguements
+
+    if (textBox.val() === '') {
+      $('.tweet-append-error').remove();
+      $('.new-tweet form').append(`<span class="tweet-append-error">
+      Error! Tweeter box is empty,fill out form!
+      </span>`);
+      return;
+    } else if (textBox.val().length > 140) {      //condition whe the tweet exceeds 140 chars
+      $('.tweet-append-error').remove();
+      $('.new-tweet form').append(`<span class="tweet-append-error">
+      Error! Tweet exceeds 140 characters!
+      </span>`);
+      return;
+
+    }
+    $.ajax({
+      method: 'POST',
+      url: '/tweets',
+      data: $('.new-tweet form').serialize()
+      //Encode a set of form elements as a string for submission.
+    })
+    .then((new_tweet) => {
+      // console.log('new tweet created!', new_tweet);
+       $('.tweet-append-error').remove();
+      loadTweets();
+      textBox.val('');
+      $(this).find('.counter').text('140');
+
+
+    })
+  });
+
+  loadTweets();
+
+  $('.compose').on('click', function() {
+    $('.new-tweet').slideToggle("fast");
+      if ($('.new-tweet').is(':visible')) {
+        $('.new-tweet textarea').focus();
+      }
+  })
+
+});

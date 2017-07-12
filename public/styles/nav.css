@@ -27,3 +27,54 @@
   padding-left: 10px;
 
 }
+
+
+/*
+ * Styles for Navigation Bar
+ *
+ */
+
+ #nav-bar {
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   padding: 0 2em;
+   margin: 0;
+   height: 80px;
+   overflow: auto;
+   z-index: 999;
+   background: #00a087;
+   color: #e8fdff;
+ }
+
+#nav-bar .logo {
+  height: 80px;
+  width: 80px;
+  float: left;
+}
+
+#nav-bar .header {
+  float: left;
+  line-height: 80px;
+  font-size: 2em;
+  margin: 0 0 0 10px;
+}
+
+#nav-bar .compose {
+  float: right;
+  height: 60px;
+  padding: 0 7px;
+  border: 1px solid #000f0d;
+  margin: 10px 0;
+  background: #e7fdff;
+  border-radius: 7px;
+  line-height: 60px;
+  color: #33aa9b;
+}
+
+#nav-bar .compose:hover {         /* hover effect to change the colour */
+  background: #fff;
+  color: #899;
+  cursor: pointer;
+}
