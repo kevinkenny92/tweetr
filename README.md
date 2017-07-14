@@ -23,8 +23,8 @@
 
 ## Screenshots
 
-!["Screenshot empty box"] (https://github.com/kevinkenny92/tweetr/blob/master/Empty%20Box.png)
-!["Screenshot regular page"] (https://github.com/kevinkenny92/tweetr/blob/master/Regular%20page.png)
-!["Screenshot long tweet."] (https://github.com/kevinkenny92/tweetr/blob/master/Long%20tweet.png)
+["Screenshot empty box"] (https://github.com/kevinkenny92/tweetr/blob/master/Empty%20Box.png)
+["Screenshot regular page"] (https://github.com/kevinkenny92/tweetr/blob/master/Regular%20page.png)
+["Screenshot long tweet."] (https://github.com/kevinkenny92/tweetr/blob/master/Long%20tweet.png)
 
 
