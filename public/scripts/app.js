@@ -106,7 +106,7 @@ function createTweetElement(tweet) {
             </p>
             <footer>
               <div class="new-tweet__time-stamp">${escape(convertDate(tweet.created_at))} Days ago</div>
-              <div class="new-tweet__icons">
+              <div class="new-tweet__icons.show">
                 <i class="fa fa-flag"></i>
                 <i class="fa fa-retweet"></i>
                 <i class="fa fa-heart"></i>
@@ -136,7 +136,7 @@ const loadTweets = () => {
     .fail(console.error);
   };
 
-  $('.new-tweet__container').on('mouseenter', '.tweet', function() {
+  $('.new-tweet__container').on('modbenter', '.tweet', function() {
    // Bind an event handler to be fired when the mouse enters an element, or trigger that handler on an element //
     $(this).find('.new-tweet__icons').addClass('show');
   })

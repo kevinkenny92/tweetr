@@ -21,11 +21,11 @@
  }
 
 .container .new-tweet input {
-  float: left;
+  float: right;
 }
 
 .counter  {
-   float: right;
+   float: left;
    padding: 0 7px;
    font-style: strong;
    font-size: 1.75ex;
@@ -78,7 +78,7 @@
 
 .new-tweet__container span {
   float: right;
-  padding: 2px;
+  padding: 3px;
   line-height: 28px;
   vertical-align: bottom;
   color: #818181;
@@ -86,6 +86,7 @@
 
 .new-tweet__container p {
   padding: 10px 15px;
+word-wrap: break-word; /* To make sure that even if a word of 140 characters is printed, it is printed within the box) */
 }
 
 .new-tweet__container footer {
@@ -96,16 +97,24 @@
 }
 
 .new-tweet__time-stamp {
-  float: left;
+  float: right;
 }
 
 .new-tweet__icons {
   float: right;
   color: #19cbba;
-  display: none;
+
 }
 
 /* Show icons */
 .new-tweet__icons.show {
+  float: right;
+  color: #19cbba;
   display: initial;
+}
+
+#new-tweet__icons.show:hover {         /* hover effect to change the colour */
+  background: #fff;
+  color: #899;
+  cursor: pointer;
 }
